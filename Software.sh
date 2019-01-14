@@ -1,11 +1,5 @@
 #!/bin/bash
 
-#############################################
-INSTALL=" sudo apt-get install"
-
-
-#############################################
-
 choice="$(zenity --width=400 --height=275 --list --column "Choix" --checklist --title="Deepin After Install" --text " Choisissez des logiciels à intégrer non disponible dans l'Appstore!" \
     --column="Noms" --column="Descriptions"\
     FALSE RadioTrayLite "Ecouter radio web"\
@@ -20,15 +14,6 @@ choice="$(zenity --width=400 --height=275 --list --column "Choix" --checklist --
 if [ "${PIPESTATUS[0]}" != "0" ]; then
    exit
 fi
-
-#############################################
-
-# foo=`gksudo -u root -k -m\
-# "Entrez votre mot de passe root"\
-# /bin/echo "got r00t?"`
-    
-#############################################
-# INTERNET
 
 case "${choice}" in
     *"RadioTrayLite"* )
@@ -69,7 +54,6 @@ sudo apt-get update
     echo "30"
     ;;
 esac
-
 
 case "${choice}" in
     *"Truecrypt"* )
