@@ -18,6 +18,6 @@ mv /home/Downloads/*.txt /home/Documents/txt/
 
 sleep 1
 
-# supprimer
+# supprimer fichier compresser et d'installation
 
 rm -f *.deb *.suo *.tar.gz *.exe *.zip *.rar ~/home/Downloads
