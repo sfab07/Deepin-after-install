@@ -1,6 +1,12 @@
 #!/bin/bash
 
-choice="$(zenity --width=400 --height=275 --list --column "Choix" --checklist --title="Deepin After Install" --text " Choisissez des logiciels à intégrer non disponible dans l'Appstore!" \
+#############################################
+INSTALL=" sudo apt-get install"
+
+
+#############################################
+
+choice="$(zenity --width=430 --height=320 --list --column "Choix" --checklist --title="Deepin After Install" --text " Choisissez des logiciels à intégrer non disponible dans l'Appstore!" \
     --column="Noms" --column="Descriptions"\
     FALSE RadioTrayLite "Ecouter radio web"\
     FALSE LiveUSBmultisystem "Créer clé usb multi OS"\
@@ -9,11 +15,22 @@ choice="$(zenity --width=400 --height=275 --list --column "Choix" --checklist --
     FALSE Zulucrypt "Cryptage de dossier"\
     FALSE Pyload "Téléchargements à distance"\
     FALSE ReFind "Interface graphique de démarrage"\
+    FALSE jnettop "Surveiller traffic via terminal"\
+    FALSE EyeD3 "Retagger mp3 en lignde de commande"\
 )"
 
 if [ "${PIPESTATUS[0]}" != "0" ]; then
    exit
 fi
+
+#############################################
+
+# foo=`gksudo -u root -k -m\
+# "Entrez votre mot de passe root"\
+# /bin/echo "got r00t?"`
+    
+#############################################
+# INTERNET
 
 case "${choice}" in
     *"RadioTrayLite"* )
@@ -55,6 +72,7 @@ sudo apt-get update
     ;;
 esac
 
+
 case "${choice}" in
     *"Truecrypt"* )
     echo "# Installation de Truecrypt"
@@ -83,6 +101,28 @@ case "${choice}" in
 sudo apt-add-repository ppa:rodsmith/refind
 sudo apt-get update
     gksudo "aptitude install -y refind"
+    echo "30"
+    ;;
+esac
+
+case "${choice}" in
+    *"Jnettop"* )
+    echo "# Installation de Jnettop"
+    gksudo "aptitude install -y jnettop"
+   killall update-manager
+    echo "30"
+    ;;
+esac
+
+case "${choice}" in
+    *"EyeD3"* )
+    echo "# Installation de EyeD3"
+wget http://ftp.br.debian.org/debian/pool/main/e/eyed3/eyed3_0.8.7-1_all.deb
+wget https://debian.pkgs.org/10/debian-main-i386/python3-eyed3_0.8.7-1_all.deb
+wget http://ftp.br.debian.org/debian/pool/main/p/python-setuptools/python3-pkg-resources_40.6.2-1_all.deb
+sudo dpkg -i python3-eyed3_0.8.7-1_all.deb && sudo dpkg -i python3-pkg-resources_40.6.2-1_all.deb && sudo dpkg -i eyed3_0.8.7-1_all.deb
+rm python3-eyed3_0.8.7-1_all.deb && rm python3-pkg-resources_40.6.2-1_all.deb && rm eyed3_0.8.7-1_all.deb
+   killall update-manager
     echo "30"
     ;;
 esac
