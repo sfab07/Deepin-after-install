@@ -1,12 +1,6 @@
 #!/bin/bash
 
-#############################################
-INSTALL=" sudo apt-get install"
-
-
-#############################################
-
-choice="$(zenity --width=430 --height=320 --list --column "Choix" --checklist --title="Deepin After Install" --text " Choisissez des logiciels à intégrer non disponible dans l'Appstore!" \
+choice="$(zenity --width=430 --height=410 --list --column "Choix" --checklist --title="Deepin After Install" --text " Choisissez des logiciels à intégrer non disponible dans l'Appstore!" \
     --column="Noms" --column="Descriptions"\
     FALSE RadioTrayLite "Ecouter radio web"\
     FALSE LiveUSBmultisystem "Créer clé usb multi OS"\
@@ -17,27 +11,20 @@ choice="$(zenity --width=430 --height=320 --list --column "Choix" --checklist --
     FALSE ReFind "Interface graphique de démarrage"\
     FALSE jnettop "Surveiller traffic via terminal"\
     FALSE EyeD3 "Retagger mp3 en lignde de commande"\
+    FALSE PdfTk "Modifier PDF"\
+    FALSE Mencoder "Modifier vidéos"\
+    FALSE Playme "Regarder videoclips Youtube"\
+    FALSE MolotovTv "Regarder chaînes Molotov"\
 )"
 
 if [ "${PIPESTATUS[0]}" != "0" ]; then
    exit
 fi
 
-#############################################
-
-# foo=`gksudo -u root -k -m\
-# "Entrez votre mot de passe root"\
-# /bin/echo "got r00t?"`
-    
-#############################################
-# INTERNET
-
 case "${choice}" in
     *"RadioTrayLite"* )
     echo "# Installation de Radio Tray Lite"
-   killall update-manager
-sudo add-apt-repository ppa:nilarimogard/webupd8
-    gksudo "aptitude install -y radiotray-lite"
+    wget http://ppa.launchpad.net/nilarimogard/webupd8/ubuntu/pool/main/r/radiotray-lite/radiotray-lite_0.2.18-1~webupd8~cosmic0_amd64.deb && sudo dpkg -i radiotray-lite_0.2.18-1~webupd8~cosmic0_amd64.deb && rm radiotray-lite_0.2.18-1~webupd8~cosmic0_amd64.deb
     echo "30"
     ;;
 esac
@@ -45,18 +32,16 @@ esac
 case "${choice}" in
     *"LiveUSBmultisystem"* )
     echo "# Installation de LiveUSBmultisystem"
-   killall update-manager
-sudo apt-get install software-properties-common && sudo apt-add-repository 'deb http://liveusb.info/multisystem/depot all main' && wget -q http://liveusb.info/multisystem/depot/multisystem.asc -O- | sudo apt-key add - && sudo apt-get update && sudo /usr/sbin/usermod -a -G adm "$SUDO_USER"
-    gksudo "aptitude install -y multisystem"
+    sudo apt-get install software-properties-common && sudo apt-add-repository 'deb http://liveusb.info/multisystem/depot all main' && wget -q http://liveusb.info/multisystem/depot/multisystem.asc -O- | sudo apt-key add - && sudo apt-get update && sudo /usr/sbin/usermod -a -G adm "$SUDO_USER"
+    sudo apt install -y multisystem
     echo "30"
     ;;
 esac
 
 case "${choice}" in
     *"ProjectLibre"* )
-    echo "# Installation de Proect Libre"
-   killall update-manager
-wget https://sourceforge.net/projects/projectlibre/files/ProjectLibre/1.8/projectlibre_1.8.0-1.deb && sudo dpkg -i projectlibre_1.8.0-1.deb && rm projectlibre_1.8.0-1.deb
+    echo "# Installation de Project Libre"
+    wget https://sourceforge.net/projects/projectlibre/files/ProjectLibre/1.8/projectlibre_1.8.0-1.deb && sudo dpkg -i projectlibre_1.8.0-1.deb && rm projectlibre_1.8.0-1.deb
     echo "30"
     ;;
 esac
@@ -64,22 +49,19 @@ esac
 case "${choice}" in
     *"Gwhere"* )
     echo "# Installation de Gwhere"
-   killall update-manager
-sudo add-apt-repository ppa:nilarimogard/webupd8 -y
-sudo apt-get update
-    gksudo "aptitude install -y gwhere"
+    sudo add-apt-repository ppa:nilarimogard/webupd8 -y
+    sudo apt-get update
+    sudo apt install -y gwhere
     echo "30"
     ;;
 esac
 
-
 case "${choice}" in
-    *"Truecrypt"* )
-    echo "# Installation de Truecrypt"
-   killall update-manager
-sudo add-apt-repository ppa:hda-me/zulucrypt -y
-sudo apt-get update
-    gksudo "aptitude install -y zulucrypt"
+    *"Zulucrypt"* )
+    echo "# Installation de Zulucrypt"
+    sudo add-apt-repository ppa:hda-me/zulucrypt -y
+    sudo apt-get update
+    sudo apt install -y zulucrypt
     echo "30"
     ;;
 esac
@@ -88,8 +70,7 @@ esac
 case "${choice}" in
     *"Pyload"* )
     echo "# Installation de Pyload"
-   killall update-manager
-wget https://github.com/pyload/pyload/releases/download/v0.4.9/pyload_0.4.9_all.deb && sudo dpkg -i pyload-v0.4.9-all.deb && rm pyload-v0.4.9-all.deb
+    wget https://github.com/pyload/pyload/releases/download/v0.4.9/pyload_0.4.9_all.deb && sudo dpkg -i pyload-v0.4.9-all.deb && rm pyload-v0.4.9-all.deb
     echo "30"
     ;;
 esac
@@ -97,10 +78,9 @@ esac
 case "${choice}" in
     *"ReFind"* )
     echo "# Installation de ReFind"
-   killall update-manager
-sudo apt-add-repository ppa:rodsmith/refind
-sudo apt-get update
-    gksudo "aptitude install -y refind"
+    sudo apt-add-repository ppa:rodsmith/refind
+    sudo apt-get update
+    sudo apt install -y refind
     echo "30"
     ;;
 esac
@@ -108,8 +88,7 @@ esac
 case "${choice}" in
     *"Jnettop"* )
     echo "# Installation de Jnettop"
-    gksudo "aptitude install -y jnettop"
-   killall update-manager
+    sudo apt install -y jnettop
     echo "30"
     ;;
 esac
@@ -117,12 +96,39 @@ esac
 case "${choice}" in
     *"EyeD3"* )
     echo "# Installation de EyeD3"
-wget http://ftp.br.debian.org/debian/pool/main/e/eyed3/eyed3_0.8.7-1_all.deb
-wget https://debian.pkgs.org/10/debian-main-i386/python3-eyed3_0.8.7-1_all.deb
-wget http://ftp.br.debian.org/debian/pool/main/p/python-setuptools/python3-pkg-resources_40.6.2-1_all.deb
-sudo dpkg -i python3-eyed3_0.8.7-1_all.deb && sudo dpkg -i python3-pkg-resources_40.6.2-1_all.deb && sudo dpkg -i eyed3_0.8.7-1_all.deb
-rm python3-eyed3_0.8.7-1_all.deb && rm python3-pkg-resources_40.6.2-1_all.deb && rm eyed3_0.8.7-1_all.deb
-   killall update-manager
+    sudo apt install -y eyed3
+    echo "30"
+    ;;
+esac
+
+case "${choice}" in
+    *"PdfTk"* )
+    echo "# Installation de PdfTk"
+    sudo apt install -y pdftk
+    echo "30"
+    ;;
+esac
+
+case "${choice}" in
+    *"mencoder"* )
+    echo "# Installation de mencoder"
+    sudo apt install -y mencoder
+    echo "30"
+    ;;
+esac
+
+case "${choice}" in
+    *"PlayMe"* )
+    echo "# Installation de Playme"
+    wget -P $HOME/AppImage/ https://github.com/lamazingco/playme/releases/download/v1.0.3/playme-1.0.3-x86_64.AppImage
+    echo "30"
+    ;;
+esac
+
+case "${choice}" in
+    *"Molotov"* )
+    echo "# Installation de Molotov"
+    wget -P $HOME/AppImage/ wget http://desktop-auto-upgrade.molotov.tv/linux/3.0.0/molotov.AppImage
     echo "30"
     ;;
 esac
