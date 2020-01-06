@@ -1,6 +1,6 @@
 #!/bin/bash
 
-choice="$(zenity --width=430 --height=410 --list --column "Choix" --checklist --title="Deepin After Install" --text " Choisissez des logiciels à intégrer non disponible dans l'Appstore!" \
+choice="$(zenity --width=430 --height=410 --list --column "Choix" --checklist --title="Deepin After Install en complément" --text " Choisissez des logiciels à intégrer non disponible dans l'Appstore!" \
     --column="Noms" --column="Descriptions"\
     FALSE RadioTrayLite "Ecouter radio web"\
     FALSE LiveUSBmultisystem "Créer clé usb multi OS"\
