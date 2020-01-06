@@ -13,8 +13,8 @@ choice="$(zenity --width=430 --height=410 --list --column "Choix" --checklist --
     FALSE EyeD3 "Retagger mp3 en lignde de commande"\
     FALSE PdfTk "Modifier PDF"\
     FALSE Mencoder "Modifier vidéos"\
-    FALSE Playme "Regarder videoclips Youtube"\
-    FALSE MolotovTv "Regarder chaînes Molotov"\
+    FALSE WebP "Codec photo"\
+    FALSE Gthumb "Lecteur pour photo WebP"\
 )"
 
 if [ "${PIPESTATUS[0]}" != "0" ]; then
@@ -119,16 +119,16 @@ esac
 
 case "${choice}" in
     *"PlayMe"* )
-    echo "# Installation de Playme"
-    wget -P $HOME/AppImage/ https://github.com/lamazingco/playme/releases/download/v1.0.3/playme-1.0.3-x86_64.AppImage
+    echo "# Installation de WebP"
+    sudo apt install -y webp
     echo "30"
     ;;
 esac
 
 case "${choice}" in
     *"Molotov"* )
-    echo "# Installation de Molotov"
-    wget -P $HOME/AppImage/ wget http://desktop-auto-upgrade.molotov.tv/linux/3.0.0/molotov.AppImage
+    echo "# Installation de Gthumb"
+    sudo apt install -y gthumb
     echo "30"
     ;;
 esac
