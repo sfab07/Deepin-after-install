@@ -120,7 +120,7 @@ case "${choice}" in
 esac
 
 case "${choice}" in
-    *"PlayMe"* )
+    *"WebP"* )
     echo "# Installation de WebP"
     sudo apt install -y webp
     echo "30"
@@ -128,7 +128,7 @@ case "${choice}" in
 esac
 
 case "${choice}" in
-    *"Molotov"* )
+    *"Gthumb"* )
     echo "# Installation de Gthumb"
     sudo apt install -y gthumb
     echo "30"
