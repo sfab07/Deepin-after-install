@@ -15,6 +15,8 @@ choice="$(zenity --width=430 --height=410 --list --column "Choix" --checklist --
     FALSE Mencoder "Modifier vidéos"\
     FALSE WebP "Codec photo"\
     FALSE Gthumb "Lecteur pour photo WebP"\
+    FALSE PIP "Installation fichier Python PIP"\
+    
 )"
 
 if [ "${PIPESTATUS[0]}" != "0" ]; then
@@ -129,6 +131,14 @@ case "${choice}" in
     *"Molotov"* )
     echo "# Installation de Gthumb"
     sudo apt install -y gthumb
+    echo "30"
+    ;;
+esac
+
+case "${choice}" in
+    *"PIP"* )
+    echo "# Installation de PIP"
+    sudo apt install -y python3-pip
     echo "30"
     ;;
 esac
