@@ -1,6 +1,6 @@
 #!/bin/bash
 
-choice="$(zenity --width=430 --height=410 --list --column "Choix" --checklist --title="Deepin After Install en complément" --text " Choisissez des logiciels à intégrer non disponible dans l'Appstore!" \
+choice="$(zenity --width=430 --height=500 --list --column "Choix" --checklist --title="Deepin After Install en complément" --text " Choisissez des logiciels à intégrer non disponible dans l'Appstore!" \
     --column="Noms" --column="Descriptions"\
     FALSE RadioTrayLite "Ecouter radio web"\
     FALSE LiveUSBmultisystem "Créer clé usb multi OS"\
@@ -15,7 +15,10 @@ choice="$(zenity --width=430 --height=410 --list --column "Choix" --checklist --
     FALSE Mencoder "Modifier vidéos"\
     FALSE WebP "Codec photo"\
     FALSE Gthumb "Lecteur pour photo WebP"\
-    FALSE PIP "Installation fichier Python PIP"\
+    FALSE Snappy "Installeur fichier Snappy"\
+    FALSE Flatpak "Installeur fichier Flatpak"\
+    FALSE PIP "Installeur fichier Python PIP"\
+    FALSE GTKdIALOG "Framework"\
     
 )"
 
@@ -136,9 +139,39 @@ case "${choice}" in
 esac
 
 case "${choice}" in
+    *"Snappy"* )
+    echo "# Installation de Snappy"
+    sudo apt install snapd
+    echo "30"
+    ;;
+esac
+
+case "${choice}" in
+    *"Flatpak"* )
+    echo "# Installation de Flatpak"
+    sudo add-apt-repository ppa:alexlarsson/flatpak
+    sudo apt update && sudo apt install flatpak
+    echo "30"
+    ;;
+esac
+
+case "${choice}" in
     *"PIP"* )
     echo "# Installation de PIP"
     sudo apt install -y python3-pip
+    echo "30"
+    ;;
+esac
+
+case "${choice}" in
+    *"GtkDialog"* )
+    echo "# Installation de GtkDialog"
+    wget https://gtkdialog.googlecode.com/files/gtkdialog-0.8.3.tar.gz
+    tar -xvf gtkdialog-0.8.3.tar.gz
+    cd gtkdialog-0.8.3/
+    ./configure
+    make
+    sudo make install
     echo "30"
     ;;
 esac
