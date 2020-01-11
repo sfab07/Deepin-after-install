@@ -19,6 +19,7 @@ choice="$(zenity --width=430 --height=500 --list --column "Choix" --checklist --
     FALSE Flatpak "Installeur fichier Flatpak"\
     FALSE PIP "Installeur fichier Python PIP"\
     FALSE GTKdIALOG "Framework"\
+    FALSE Youtube "Télécharger video youtube"\
     
 )"
 
@@ -172,6 +173,14 @@ case "${choice}" in
     ./configure
     make
     sudo make install
+    echo "30"
+    ;;
+esac
+
+case "${choice}" in
+    *"Youtube"* )
+    echo "# Installation de Youtube downloader"
+    sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
     echo "30"
     ;;
 esac
